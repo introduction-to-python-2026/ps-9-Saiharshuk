@@ -1,3 +1,4 @@
-selected_features: ["MDVP:Fo(Hz)", "MDVP:Jitter(%)"]
+selected_features:
+  - "MDVP:Fo(Hz)"
+  - "MDVP:Fhi(Hz)"
 path: "my_model.joblib"
-scaler_path: "scaler.joblib"
