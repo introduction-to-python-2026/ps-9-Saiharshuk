@@ -1,7 +1,7 @@
 import pandas as pd
 df = pd.read_csv('parkinsons.csv')
 df = df.dropna()
-df.head() # Removed unnecessary head() call here
+
 
 x = df[['MDVP:Fo(Hz)', 'MDVP:Jitter(%)']]
 y = df['status']
@@ -32,4 +32,4 @@ accuracy = accuracy_score(y_test, y_pred)
 print(accuracy)
 
 import joblib
-joblib.dump(model, 'my_model.joblib')
+joblib.dump(model,'my_model.joblib')
