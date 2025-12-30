@@ -72,4 +72,4 @@ with open(config_file_path, 'w') as file:
 # 7. Save the model
 import joblib
 joblib.dump(model, 'my_model.joblib')
-joblib.dump(model, 'my_model.joblib')
+
