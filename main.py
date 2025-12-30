@@ -1,7 +1,7 @@
 import pandas as pd
 df = pd.read_csv('parkinsons.csv')
 df = df.dropna()
-# df.head() # Removed unnecessary head() call here
+df.head() # Removed unnecessary head() call here
 
 x = df[['MDVP:Fo(Hz)', 'MDVP:Jitter(%)']]
 y = df['status']
