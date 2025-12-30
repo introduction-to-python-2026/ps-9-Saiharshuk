@@ -32,3 +32,5 @@ print(accuracy)
 
 # 7. Save model
 joblib.dump(model, "my_model.joblib")
+joblib.dump(scaler, "scaler.joblib")
+
