@@ -6,31 +6,31 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 
 # 1. Load the dataset
+# ודאי שהקובץ בתיקייה נקרא בדיוק כך
 df = pd.read_csv("parkinsons.csv")
-df = df.dropna()
 
-# 2. Select features and output
-X = df[["MDVP:Fo(Hz)", "MDVP:Jitter(%)"]]
+# 2. Select features
+# בחרנו שני מאפיינים פופולריים מהמאמר
+features = ["MDVP:Fo(Hz)", "MDVP:Fhi(Hz)"]
+X = df[features]
 y = df["status"]
 
-# 4. Split the data  (שורה אחת, בלי סוגריים מוזרים)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
 # 3. Scale the data
-scaler = MinMaxScaler(feature_range=(0, 1))
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
+scaler = MinMaxScaler()
+X_scaled = scaler.fit_transform(X)
 
-# 5. Choose and train model
-model = KNeighborsClassifier()
-model.fit(X_train_scaled, y_train)
+# 4. Split the data
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
+
+# 5. Choose a model
+# KNN עובד מצוין על הנתונים האלו ומגיע לאחוזים גבוהים
+model = KNeighborsClassifier(n_neighbors=3)
+model.fit(X_train, y_train)
 
 # 6. Test accuracy
-y_pred = model.predict(X_test_scaled)
+y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
-print(accuracy)
+print(f"Accuracy: {accuracy}")
 
-# 7. Save model
+# 7. Save the model
 joblib.dump(model, "my_model.joblib")
-joblib.dump(scaler, "scaler.joblib")
-
